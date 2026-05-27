@@ -1,4 +1,4 @@
-import { Link, NavLink, Route, Routes } from "react-router-dom";
+import { Link, NavLink, Route, Routes, useNavigate } from "react-router-dom";
 import { ShoppingCart, Sprout } from "lucide-react";
 import { useSelector } from "react-redux";
 import AboutUs from "./AboutUs.jsx";
@@ -29,6 +29,11 @@ function Header() {
 }
 
 function LandingPage() {
+  const navigate = useNavigate();
+  const handleGetStartedClick = () => {
+    navigate("/plants");
+  };
+
   return (
     <main className="landing-page">
       <section className="hero-section">
@@ -36,9 +41,9 @@ function LandingPage() {
           <p className="eyebrow">Fresh houseplants delivered with care</p>
           <h1>Paradise Nursery</h1>
           <AboutUs />
-          <Link className="primary-button" to="/plants">
+          <button className="primary-button get-started-button" type="button" onClick={handleGetStartedClick}>
             Get Started
-          </Link>
+          </button>
         </div>
       </section>
     </main>

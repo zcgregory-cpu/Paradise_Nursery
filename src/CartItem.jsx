@@ -16,7 +16,7 @@ function CartItem() {
   const cartTotal = useSelector(selectCartTotal);
 
   return (
-    <main className="page-shell cart-page">
+    <main className="page-shell cart-page cart-container">
       <section className="page-heading cart-heading">
         <div>
           <p className="eyebrow">Your selection</p>
@@ -38,17 +38,20 @@ function CartItem() {
         </section>
       ) : (
         <>
-          <section className="cart-list" aria-label="Plants in cart">
+          <section className="cart-list cart-items" aria-label="Plants in cart">
             {items.map((item) => (
               <article className="cart-item" key={item.id}>
-                <img src={item.image} alt={item.name} />
+                <img className="cart-item-image" src={item.image} alt={item.name} />
                 <div className="cart-item-details">
-                  <h2>{item.name}</h2>
-                  <p>Unit price: ${item.price.toFixed(2)}</p>
-                  <p className="line-total">Item total: ${(item.price * item.quantity).toFixed(2)}</p>
+                  <h2 className="cart-item-name">{item.name}</h2>
+                  <p className="cart-item-price">Unit price: ${item.price.toFixed(2)}</p>
+                  <p className="line-total cart-item-total">
+                    Item total: ${(item.price * item.quantity).toFixed(2)}
+                  </p>
                 </div>
-                <div className="quantity-controls" aria-label={`${item.name} quantity controls`}>
+                <div className="quantity-controls cart-item-quantity" aria-label={`${item.name} quantity controls`}>
                   <button
+                    className="decrease-button"
                     type="button"
                     onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity - 1 }))}
                     aria-label={`Decrease ${item.name} quantity`}
@@ -57,6 +60,7 @@ function CartItem() {
                   </button>
                   <span aria-label={`${item.name} quantity`}>{item.quantity}</span>
                   <button
+                    className="increase-button"
                     type="button"
                     onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity + 1 }))}
                     aria-label={`Increase ${item.name} quantity`}
@@ -65,7 +69,7 @@ function CartItem() {
                   </button>
                 </div>
                 <button
-                  className="delete-button"
+                  className="delete-button remove-button"
                   type="button"
                   onClick={() => dispatch(removeItem(item.id))}
                   aria-label={`Delete ${item.name} from cart`}
@@ -81,7 +85,7 @@ function CartItem() {
             <Link className="secondary-button" to="/plants">
               Continue Shopping
             </Link>
-            <button type="button" className="primary-button" onClick={() => alert("Coming Soon")}>
+            <button type="button" className="primary-button checkout-button" onClick={() => alert("Coming Soon")}>
               Checkout
             </button>
           </section>

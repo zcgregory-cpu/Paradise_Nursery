@@ -4,46 +4,46 @@ import { addItem, selectCartItems } from "./CartSlice.jsx";
 
 const plants = [
   {
-    id: "monstera-deliciosa",
-    name: "Monstera Deliciosa",
-    category: "Statement Plants",
-    price: 32,
-    image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: "fiddle-leaf-fig",
-    name: "Fiddle Leaf Fig",
-    category: "Statement Plants",
-    price: 45,
-    image: "https://images.unsplash.com/photo-1597055181449-b9b97f5b5f1f?auto=format&fit=crop&w=600&q=80",
-  },
-  {
     id: "snake-plant",
     name: "Snake Plant",
-    category: "Low Light Favorites",
+    category: "Air Purifying Plants",
     price: 24,
     image: "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=600&q=80",
   },
   {
+    id: "peace-lily",
+    name: "Peace Lily",
+    category: "Air Purifying Plants",
+    price: 30,
+    image: "https://images.unsplash.com/photo-1598880940080-ff9a29891b85?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    id: "monstera-deliciosa",
+    name: "Monstera Deliciosa",
+    category: "Low Maintenance Plants",
+    price: 32,
+    image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=600&q=80",
+  },
+  {
     id: "zz-plant",
     name: "ZZ Plant",
-    category: "Low Light Favorites",
+    category: "Low Maintenance Plants",
     price: 28,
     image: "https://images.unsplash.com/photo-1632207691143-643e2a9a9361?auto=format&fit=crop&w=600&q=80",
   },
   {
-    id: "aloe-vera",
-    name: "Aloe Vera",
-    category: "Succulents",
-    price: 18,
-    image: "https://images.unsplash.com/photo-1509423350716-97f9360b4e09?auto=format&fit=crop&w=600&q=80",
+    id: "lavender",
+    name: "Lavender",
+    category: "Aromatic Fragrant Plants",
+    price: 22,
+    image: "https://images.unsplash.com/photo-1499002238440-d264edd596ec?auto=format&fit=crop&w=600&q=80",
   },
   {
-    id: "jade-plant",
-    name: "Jade Plant",
-    category: "Succulents",
-    price: 20,
-    image: "https://images.unsplash.com/photo-1459156212016-c812468e2115?auto=format&fit=crop&w=600&q=80",
+    id: "jasmine",
+    name: "Jasmine",
+    category: "Aromatic Fragrant Plants",
+    price: 26,
+    image: "https://images.unsplash.com/photo-1612363148951-15f16817648f?auto=format&fit=crop&w=600&q=80",
   },
 ];
 
@@ -55,7 +55,7 @@ function ProductList() {
   const cartIds = new Set(cartItems.map((item) => item.id));
 
   return (
-    <main className="page-shell">
+    <main className="page-shell product-list">
       <section className="page-heading">
         <p className="eyebrow">Shop the greenhouse</p>
         <h1>Choose Your Houseplants</h1>
@@ -71,13 +71,13 @@ function ProductList() {
                 const isAdded = cartIds.has(plant.id);
 
                 return (
-                  <article className="product-card" key={plant.id}>
-                    <img src={plant.image} alt={plant.name} />
+                  <article className="product-card plant-card" key={plant.id}>
+                    <img className="plant-image" src={plant.image} alt={plant.name} />
                     <div className="product-body">
-                      <h3>{plant.name}</h3>
-                      <p className="price">${plant.price.toFixed(2)}</p>
+                      <h3 className="plant-name">{plant.name}</h3>
+                      <p className="price plant-price">${plant.price.toFixed(2)}</p>
                       <button
-                        className="cart-button"
+                        className="cart-button add-to-cart-button"
                         type="button"
                         disabled={isAdded}
                         onClick={() => dispatch(addItem(plant))}
